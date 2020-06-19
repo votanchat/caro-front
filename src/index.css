@@ -8,10 +8,10 @@ ul {
   padding-left: 50px;
 }
 
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
+.board-row{
+  overflow-x: auto;
+  overflow-y: auto;
+  white-space: nowrap;
 }
 
 .status {
