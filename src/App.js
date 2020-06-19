@@ -4,19 +4,29 @@ import Board from "./component/Board";
 import "./index.css";
 
 export default function App() {
-  const [squares, setSquares] = useState(Array(9).fill(null));
-  const [xIsNext, setXIsNext] = useState(true);
+  const createArrays = nums => {
+    var squares = [];
+    for(let i = 0; i < nums; i++){
+      squares[i] = [];
+      for(let j= 0; j<nums; j++){
+        squares[i][j] = null;
+      }
+    }
 
+    return squares;
+  }
+  const [squares, setSquares] = useState(createArrays(16));
+  const [xIsNext, setXIsNext] = useState(true);
+  const [winner,setWinner] = useState(null)
   const handleClick = i => {
-    if (checkWinner(squares) || squares[i]) {
+    if (winner || squares[i[0]][i[1]]) {
       return;
     }
-    squares[i] = xIsNext ? "X" : "O";
+    squares[i[0]][i[1]] = xIsNext ? "X" : "O";
     setSquares(squares);
+    setWinner(checkWinner(squares,i));
     setXIsNext(!xIsNext);
   };
-
-  const winner = checkWinner(squares);
 
   let status;
   if (winner) {
@@ -37,22 +47,9 @@ export default function App() {
   );
 }
 
-function checkWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
+function checkWinner(squares,i) {
+  if(i[0] === 1 && i[1] === 1){
+    return squares[i[0]][i[1]];
   }
   return null;
 }

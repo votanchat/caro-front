@@ -2,18 +2,23 @@ import React from "react";
 
 import Square from "./Square";
 
-export default function Board({ squares, onClick }) {
-  const renderSquares = numbs => {
-    return numbs.map(num => (
-      <Square value={squares[num]} key={num} onClick={() => onClick(num)} />
-    ));
-  };
+export default function Board({ squares, onClick }) {  
+  const renderSquares1 = () => {
+    let board = [];
+    for(let i = 0; i < squares.length; i++){
+      let row = [];
+      for(let j= 0; j < squares.length; j++){
+        let coor = [i,j];
+        row.push(<Square value={squares[i][j]} key={'key'+i+j} onClick={() => onClick(coor)} />)
+      }
+    board.push(<div className="board-row" key={i}>{row}</div>)
+    }
+    return board;
+  }
 
   return (
     <div>
-      <div className="board-row">{renderSquares([0, 1, 2])}</div>
-      <div className="board-row">{renderSquares([3, 4, 5])}</div>
-      <div className="board-row">{renderSquares([6, 7, 8])}</div>
+      {renderSquares1()}
     </div>
   );
 }
