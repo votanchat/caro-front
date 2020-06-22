@@ -6,6 +6,7 @@ import "./index.css";
 export default function App() {
   var length = 16;
   var d = 5;
+  let status;
   const createArrays = nums => {
     var squares = [];
     for(let i = 0; i < nums; i++){
@@ -19,7 +20,7 @@ export default function App() {
   }
   const [squares, setSquares] = useState(createArrays(length));
   const [xIsNext, setXIsNext] = useState(true);
-  const [winner,setWinner] = useState(null)
+  const [winner,setWinner] = useState(null);
   const handleClick = i => {
     if (winner || squares[i[0]][i[1]]) {
       return;
@@ -30,7 +31,6 @@ export default function App() {
     setXIsNext(!xIsNext);
   };
 
-  let status;
   if (winner) {
     status = "Winner: " + winner;
   } else {
@@ -43,7 +43,7 @@ export default function App() {
         <Board squares={squares} onClick={i => handleClick(i)} />
       </div>
       <div className="game-info">
-        <div>{status}</div>
+      <div>{status}{console.log(status)}</div>
       </div>
     </div>
   );
