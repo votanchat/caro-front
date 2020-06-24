@@ -43,7 +43,7 @@ export default function App() {
         <Board squares={squares} onClick={i => handleClick(i)} />
       </div>
       <div className="game-info">
-      <div>{status}{console.log(status)}</div>
+      <div>{status}</div>
       </div>
     </div>
   );
